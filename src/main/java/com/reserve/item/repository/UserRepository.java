@@ -23,11 +23,12 @@ public class UserRepository {
     }
 
     public Optional<User> findOne(String id){
+        System.out.println("id : " + id);
         try {
             return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.id=:id",User.class)
                     .setParameter("id",id).getSingleResult());
-        }catch(javax.persistence.NonUniqueResultException e){
-            return null;
+        }catch(javax.persistence.NoResultException e){
+            return Optional.empty();
         }
     }
 }

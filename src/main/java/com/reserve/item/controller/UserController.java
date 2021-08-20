@@ -24,8 +24,14 @@ public class UserController {
     public String loginProcess(UserLoginForm userLoginForm) {
         Optional<User> user = userService.findUserById(userLoginForm.getId());
         String password = userLoginForm.getPassword();
-        return user.map(m -> m.getPassword().equals(password) ? "main" : "redirect:/")
-                .orElseGet(() -> "redirect:/");
+        System.out.println("userLoginForm password : " + password);
+        return user.map(m -> {
+            System.out.println("aa");
+            return m.getPassword().equals(password) ? "main" : "redirect:/";})
+                .orElseGet(() -> {
+                    System.out.println("bb");
+                    return "redirect:/";
+                });
     }
 
     @GetMapping("/register")

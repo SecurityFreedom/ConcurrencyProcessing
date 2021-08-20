@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -28,7 +29,7 @@ public class UserServiceTest {
         userService.join(user);
         em.flush();
 
-        user = userService.findUser("lsh@naver.com");
+        Optional<User> finduser = userService.findUserByEmail("lsh@naver.com");
         Assertions.assertThat(user.getName()).isEqualTo("hihi");
     }
 }

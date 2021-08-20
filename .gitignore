@@ -16,6 +16,7 @@ build/
 .properties
 application.yml
 *.yml
+.yaml
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/

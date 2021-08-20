@@ -14,7 +14,8 @@ build/
 .springBeans
 .sts4-cache
 .properties
-.yml
+application.yml
+*.yml
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/

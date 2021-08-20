@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,5 +20,10 @@ public class UserService {
     public Long join(User user) {
         userRepository.save(user);
         return user.getPk();
+    }
+
+    @Transactional
+    public Optional<User> findUserById(String id){
+        return userRepository.findOne(id);
     }
 }

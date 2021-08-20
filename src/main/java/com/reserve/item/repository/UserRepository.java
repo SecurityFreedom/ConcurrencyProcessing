@@ -29,12 +29,15 @@ public class UserRepository {
     }
 
     public Optional<User> findOne(String id){
+        System.out.println("id : " + id);
         try {
             List<User> findUser = em.createQuery("SELECT u FROM User u WHERE u.id=:id", User.class)
                     .setParameter("id", id).getResultList();
             return findUser.size() > 0 ? Optional.ofNullable(findUser.get(0)) : null;
-        }catch(javax.persistence.NonUniqueResultException e){
-            return null;
+//            return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.id=:id",User.class)
+//                    .setParameter("id",id).getSingleResult());
+        }catch(javax.persistence.NoResultException e){
+            return Optional.empty();
         }
     }
 }

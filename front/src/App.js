@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React, {useEffect} from "react";
 import './App.css';
+import axios from "axios";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const baseUrl = "http://localhost:8080";
+
+    useEffect(()=>{
+        getItems();
+    }, []);
+
+    async function getItems() {
+        await axios
+            .get(baseUrl)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+
+
+    return (
+        <div className="App">
+            hello
+        </div>
+    );
 }
 
 export default App;

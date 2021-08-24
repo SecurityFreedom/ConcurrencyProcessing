@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-<div class="container">
-  <form action="/" method="post">
-    <div class="form-group">
-      <label for="id">이름</label>
-      <input type="text" id="id" name="id" placeholder="id">
-      <input type="text" id="password" name="password" placeholder="pw">
 
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scal=1.0">
+    <title>CP Main</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+</head>
+
+<div class="wrapper">
+    <div class="container">
+        <h1>Welcome</h1>
+
+        <form class="form">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button type="submit" id="login-button">Login</button>
+        </form>
     </div>
-    <button type="submit">등록</button>
-  </form>
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 </div>
-</body>
 </html>

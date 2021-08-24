@@ -1,0 +1,51 @@
+
+.header {
+    color : white;
+    font-size: 30px;
+    width: 100%;
+    height: 100px;
+    background-color: #fa5252;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+
+
+    .logoName{
+        cursor:default;
+        .header__logo {
+            display: inline-block;
+            font-size: 60px;
+            margin-right: 15px;
+            -webkit-animation: fa-spin 10s infinite linear;
+            animation: fa-spin 10s infinite linear;
+        }
+
+        .header__title {
+            display: inline-block;
+        }
+    }
+
+    .menus { 
+        height: 100%;
+
+        .li {
+            list-style-type: none;
+            display: inline-block;
+            margin-left : 24px;
+            height: 100%;
+            line-height: 100px;
+            .menus__item {
+                color : white;
+                text-decoration: none;
+            }
+            &:hover{
+                background-color: white;
+                .menus__item{
+                    color : #fa5252;
+                }
+                
+            }
+        }
+    }
+}
+

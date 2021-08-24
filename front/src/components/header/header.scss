@@ -27,23 +27,43 @@
 
     .menus { 
         height: 100%;
-
+        font-size: 25px;
         .li {
+            width: 150px;
             list-style-type: none;
             display: inline-block;
             margin-left : 24px;
             height: 100%;
             line-height: 100px;
+            text-align: center;
             .menus__item {
                 color : white;
                 text-decoration: none;
+
+                .cart__item_num{
+                    background-color: white;
+                    color : #fa5252;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    font-size: 15px;
+                    top:26px;
+                    transform: translateX(-5px);
+                }
             }
             &:hover{
                 background-color: white;
                 .menus__item{
                     color : #fa5252;
+
+                    .cart__item_num{
+                        background-color: #fa5252;
+                        color : white;
+                    }
                 }
-                
             }
         }
     }

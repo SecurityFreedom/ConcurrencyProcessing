@@ -172,14 +172,16 @@ java -jar ./${SNAPSHOT}.jar
 + `UserService`
     + void user(User)
     + JWT login(User.id, User.pw)
-    + User editUser(User)
+    + boolean editUser(User)
 
 + `ItemService`
     + List<Item> getItems()
+
 + `OrderService`
     + Optional<Orders> createOrder(User,Item,Coupon)
     + boolean verifyOrder(Order)
     + AcceptOrder(Order)
+
 + `CouponService`
     + List<Coupon> getCouponInfo()
     + boolean getCoupon(User,Coupon)

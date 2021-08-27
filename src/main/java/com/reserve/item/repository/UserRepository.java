@@ -9,37 +9,9 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@RequiredArgsConstructor
-public class UserRepository {
-    private final EntityManager em;
-
-    public void save(User user) {
-        System.out.println("$$$$$$$$"+user.getPk());
-        em.persist(user);
-        System.out.println("$$$$$$$$"+user.getPk());
-    }
-
-    public Optional<User> findByEmail(String email) {
-        return Optional.ofNullable(em.createQuery("select u from User u where u.email =:email", User.class)
-                .setParameter("email",email)
-                .getSingleResult());
-    }
-
-    public List<User> findAll(){
-        return em.createQuery("SELECT u FROM User u",User.class).getResultList();
-    }
-
-    public Optional<User> findOne(String id){
-        System.out.println("id : " + id);
-        try {
-            List<User> findUser = em.createQuery("SELECT u FROM User u WHERE u.id=:id", User.class)
-                    .setParameter("id", id).getResultList();
-            return findUser.size() > 0 ? Optional.ofNullable(findUser.get(0)) : null;
-//            return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.id=:id",User.class)
-//                    .setParameter("id",id).getSingleResult());
-        }catch(javax.persistence.NoResultException e){
-            return Optional.empty();
-        }
-    }
+public interface UserRepository {
+    void save(User user);
+    Optional<User> findByEmail(String email);
+    List<User> findAll();
+    Optional<User> findOne(String id);
 }

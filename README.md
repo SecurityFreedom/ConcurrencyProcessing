@@ -170,17 +170,17 @@ java -jar ./${SNAPSHOT}.jar
 ### 6. Design - Service
 
 + `UserService`
-    + void register(Member)
-    + JWT login(Member.id, Member.pw)
-    + Member editMember(Member)
+    + void user(User)
+    + JWT login(User.id, User.pw)
+    + User editUser(User)
 
 + `ItemService`
     + List<Item> getItems()
 + `OrderService`
-    + Optional<Orders> CreateOrder(User,Item,Coupon.name)
+    + Optional<Orders> CreateOrder(User,Item,Coupon)
 + `CouponService`
     + List<Coupon> getCouponInfo()
-    + boolean getCoupon(User,couponName);
+    + boolean getCoupon(User,Coupon);
 
 ------------------------------
 

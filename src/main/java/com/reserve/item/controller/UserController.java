@@ -1,7 +1,7 @@
 package com.reserve.item.controller;
 
 import com.reserve.item.domain.User;
-import com.reserve.item.service.UserService;
+import com.reserve.item.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

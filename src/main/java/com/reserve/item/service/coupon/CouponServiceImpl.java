@@ -16,8 +16,8 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class CouponServiceImpl implements CouponService {
-    CouponRepository couponRepository;
-    CouponStateRepository couponStateRepository;
+    private final CouponRepository couponRepository;
+    private final CouponStateRepository couponStateRepository;
 
     @Override
     public List<Coupon> getCouponInfo() {

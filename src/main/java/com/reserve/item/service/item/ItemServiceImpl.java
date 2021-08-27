@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     @Override
     public List<Item> getItems() {

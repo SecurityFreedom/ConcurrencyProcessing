@@ -177,10 +177,12 @@ java -jar ./${SNAPSHOT}.jar
 + `ItemService`
     + List<Item> getItems()
 + `OrderService`
-    + Optional<Orders> CreateOrder(User,Item,Coupon)
+    + Optional<Orders> createOrder(User,Item,Coupon)
+    + boolean verifyOrder(Order)
+    + AcceptOrder(Order)
 + `CouponService`
     + List<Coupon> getCouponInfo()
-    + boolean getCoupon(User,Coupon);
+    + boolean getCoupon(User,Coupon)
 
 ------------------------------
 
@@ -205,13 +207,9 @@ Repositories are based on Spring JPA
 > > --->ItemRepository
 >
 > OrderService
-> > --->UserRepository
->
-> > --->ItemRepository
->
 > > --->OrderRepository
 >
-> > --->CouponRepository
+> > --->CouponStateRepository
 >
 > CouponService
 > > --->CouponRepository

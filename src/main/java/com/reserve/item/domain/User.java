@@ -1,16 +1,15 @@
 package com.reserve.item.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+//생성자 및 생성메소드 추가.
+
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor
+@Setter(AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @SequenceGenerator(
         name="member_sequence_generator",
@@ -18,13 +17,22 @@ import javax.persistence.*;
         initialValue = 1, allocationSize = 30
 )
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                        generator = "member_sequence_generator")
-    @Column(name="MEMBER_ID")
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE
+                        ,generator = "member_sequence_generator")
+    @Column(name="USER_ID")
     private long pk;
 
     private String id;
     private String name;
     private String password;
     private String email;
+
+    public static User createUser(String id, String name, String password, String email) {
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        return user;
+    }
 }

@@ -1,2 +1,4 @@
-package com.reserve.item.service.coupon;public class CouponServiceImpl {
+package com.reserve.item.service.coupon;
+
+public class CouponServiceImpl {
 }

@@ -44,11 +44,7 @@ public class UserController {
         Optional<User> user = userService.findUserById(userRegisterForm.getId());
         return user.map(m->"redirect:/register")
                 .orElseGet(()->{
-                    User newUser = new User();
-                    newUser.setId(userRegisterForm.getId());
-                    newUser.setName(userRegisterForm.getName());
-                    newUser.setPassword(userRegisterForm.getPassword());
-                    newUser.setEmail(userRegisterForm.getEmail());
+                    User newUser = User.createUser(userRegisterForm.getId(),userRegisterForm.getName(),userRegisterForm.getPassword(),userRegisterForm.getEmail());
                     userService.join(newUser);
                     return "redirect:/";
                 });

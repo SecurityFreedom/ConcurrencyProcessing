@@ -15,7 +15,9 @@ public class UserRepository {
     private final EntityManager em;
 
     public void save(User user) {
+        System.out.println("$$$$$$$$"+user.getPk());
         em.persist(user);
+        System.out.println("$$$$$$$$"+user.getPk());
     }
 
     public Optional<User> findByEmail(String email) {

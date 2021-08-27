@@ -1,3 +1,4 @@
-package com.reserve.item.service.user;public class UserServiceImpl {
-    int a;
+package com.reserve.item.service.user;
+
+public class UserServiceImpl {
 }

@@ -1,4 +1,6 @@
 package com.reserve.item.repository.impl;
 
-public class OrderJpaRepository {
+import com.reserve.item.repository.OrderRepository;
+
+public class OrderJpaRepository implements OrderRepository {
 }

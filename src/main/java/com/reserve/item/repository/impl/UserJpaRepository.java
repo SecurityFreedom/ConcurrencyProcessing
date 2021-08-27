@@ -1,6 +1,7 @@
 package com.reserve.item.repository.impl;
 
 import com.reserve.item.domain.User;
+import com.reserve.item.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepository {
+public class UserJpaRepository implements UserRepository {
     private final EntityManager em;
 
 

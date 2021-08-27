@@ -1,4 +1,4 @@
 package com.reserve.item.repository;
 
-public interface UserRepository {
+public interface OrderRepository {
 }

@@ -1,2 +1,5 @@
-package com.reserve.item.repository;public interface CouponStateRepository {
+package com.reserve.item.repository;
+
+public interface CouponStateRepository {
+
 }

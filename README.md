@@ -9,10 +9,10 @@
 3. Dependency
 4. Prerequisite
 5. Usage
-6. Design - Service
-7. Design - Repository
-8. Design - Class Dependency
-9. Design - DB schema - Table
+6. Service
+7. Repository
+8. Class Dependency
+9. DB schema - Table
 
 ------------------------------------
 
@@ -228,6 +228,8 @@ Table `User`
 + password
 + email
   > If user forget his password, he can retrieve it using this email.
++ account
+  > user's account (money)
 
 ------------------------------------
 

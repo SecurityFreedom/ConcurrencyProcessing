@@ -22,7 +22,13 @@ public class CouponRate extends Coupon{
         return c;
     }
 
+    @Override
     public void changeDiscount(int amount) {
         this.discountRate = amount;
+    }
+
+    @Override
+    public int getDiscountValue(int itemPrice) {
+        return itemPrice * (100 - discountRate) / 100;
     }
 }

@@ -23,9 +23,13 @@ public class CouponFixed extends Coupon{
         return c;
     }
 
-
+    @Override
     public void changeDiscount(int amount) {
         this.discountAmount = amount;
     }
 
+    @Override
+    public int getDiscountValue(int itemPrice) {
+        return itemPrice - discountAmount;
+    }
 }

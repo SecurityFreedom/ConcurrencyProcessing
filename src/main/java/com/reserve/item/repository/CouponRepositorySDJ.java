@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CouponRepositorySDJ extends JpaRepository<Coupon, Long> {
@@ -23,7 +24,11 @@ public interface CouponRepositorySDJ extends JpaRepository<Coupon, Long> {
     Integer getRemainByUserAndCoupon(@Param("user")User user, @Param("coupon")Coupon coupon);
 
     //유저가 발급받은 쿠폰 목록
-    
+    //테스트 필요
+    @Query("select s.coupon from CouponState s where s.user = :user")
+    List<Coupon> getListByUserName(@Param("user")User user);
+
+    //대상 유저의 특정 쿠폰 발급정보
     @Query("select s from CouponState s where s.user = :user and s.coupon = :coupon")
     Optional<CouponState> getCouponstateByUserAndCoupon(@Param("user")User user,@Param("coupon")Coupon coupon);
 }

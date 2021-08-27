@@ -26,6 +26,7 @@ public class User {
     private String name;
     private String password;
     private String email;
+    private int account;
 
     public static User createUser(String id, String name, String password, String email) {
         User user = new User();

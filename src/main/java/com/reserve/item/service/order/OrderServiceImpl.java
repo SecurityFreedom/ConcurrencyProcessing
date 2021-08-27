@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
         orders.setUser(user);
         orders.setItem(item);
         orders.setCoupon(coupon);
-        return Optional.ofNullable(orders);
+        return Optional.of(orders);
     }
 
     @Override
@@ -34,26 +34,19 @@ public class OrderServiceImpl implements OrderService {
         // 쿠폰 유효성 검사.   (Coupon state에 사용자의 쿠폰 개수가 유효한 지.)
         return couponStateRepository.findByUserAndCoupon(user,coupon).map((couponState) -> {
             // 쿠폰이 하나라도 존재하는 경우. && 쿠폰을 적용했을 때 사용자의 잔고가 충분한 지. && 상품의 카테고리가 같은 지.
-            if(couponState.getCurrentAmount() > 0 && isAvailableMoney(user,coupon,item.getPrice())
-                    && isSameCategory(item.getCategory(),coupon.getCategory())){
-                return true;
-            }
-            return false;
+            return couponState.getCurrentAmount() > 0 && isAvailableMoney(user, coupon, item.getPrice())
+                    && isSameCategory(item.getCategory(), coupon.getCategory());
         }).orElse(false);
     }
 
     private boolean isSameCategory(Category itemCategory, Category couponCategory) {
-        // BODY 작성.
-        //
-        //
-        return true;
+        // 카테고리 이름이 같을 때, itemCategory >= couponCategory 에 속한다고 판단하고 true return.
+        // 추후 Category 테이블을 따로 생성하여 확장하면, 바꾸어야 함.
+        return itemCategory.equals(couponCategory);
     }
 
     private boolean isAvailableMoney(User user, Coupon coupon, int price) {
-        // BODY 작성.
-        //
-        //
-        return true;
+        return coupon.getDiscountValue(price) >= user.getAccount();
     }
 
     @Override

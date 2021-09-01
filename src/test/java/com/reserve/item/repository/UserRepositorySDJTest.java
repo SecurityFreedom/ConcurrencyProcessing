@@ -1,6 +1,7 @@
 package com.reserve.item.repository;
 
 import com.reserve.item.domain.User;
+import com.reserve.item.repository.impl.UserJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ class UserRepositorySDJTest {
     @Autowired
     UserRepositorySDJ userRepo;
     @Autowired
+    UserJpaRepository jpaRepo;
+    @Autowired
     UserRepository ur;
     @Autowired
     EntityManager em;
@@ -31,14 +34,15 @@ class UserRepositorySDJTest {
     @Test
     @DisplayName("회원 등록 & 이름으로 찾기")
     public void 회원추가_찾기() {
-        User user = User.createUser("my id", "lsh", "1234", "heheh22Dd");
-        userRepo.save(user);
+//        User user = User.createUser("my id", "lsh", "1234", "heheh22Dd");
+//        userRepo.save(user);
 
         em.flush();
         em.clear();
 
-//        User find = userRepo.findByName("lsh").get();
-//        assertThat(find.getId()).isEqualTo(user.getId());
+        User find = jpaRepo.findOne("idid2").orElse(null);
+        if(find != null) System.out.println("find.getName() = " + find.getName());
+        else System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
     }
 
 

@@ -3,7 +3,7 @@ package com.reserve.item.service.coupon;
 import com.reserve.item.domain.Coupon;
 import com.reserve.item.domain.CouponState;
 import com.reserve.item.domain.User;
-import com.reserve.item.repository.CouponRepository;
+import com.reserve.item.repository.CouponRepositorySDJ;
 import com.reserve.item.repository.CouponStateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class CouponServiceImpl implements CouponService {
-    private final CouponRepository couponRepository;
+    private final CouponRepositorySDJ couponRepository;
     private final CouponStateRepository couponStateRepository;
 
     @Override

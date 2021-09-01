@@ -133,11 +133,24 @@ class CouponRepositorySDJTest {
     }
 
     @Test
+    @DisplayName("쿠폰 다 사용 후 다시 조회")
+    public void 쿠폰사용후조회(){
+        User user = userRepo.findById(1L).get();
+        CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
+
+        CouponState couponstate = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
+        couponstate.useCoupon();
+
+        CouponState afterUse = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
+        assertThat(afterUse.getCurrentAmount()).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("쿠폰 발급 목록")
     public void 쿠폰목록() {
         User user = userRepo.findById(1L).get();
         CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
-        List<Coupon> listByUser = couponRepo.getListByUser(user);
+        List<Coupon> listByUser = csRepo.getListByUser(user);
         for (Coupon coupon : listByUser) {
             System.out.println("[coupon : " + coupon.getName() + "]");
         }

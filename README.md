@@ -9,10 +9,10 @@
 3. Dependency
 4. Prerequisite
 5. Usage
-6. Design - Service
-7. Design - Repository
-8. Design - Class Dependency
-9. Design - DB schema - Table
+6. Service
+7. Repository
+8. Class Dependency
+9. DB schema - Table
 
 ------------------------------------
 
@@ -170,23 +170,27 @@ java -jar ./${SNAPSHOT}.jar
 ### 6. Design - Service
 
 + `UserService`
-    + void register(Member)
-    + JWT login(Member.id, Member.pw)
-    + Member editMember(Member)
+  + void user(User)
+  + JWT login(User.id, User.pw)
+  + boolean editUser(User)
 
 + `ItemService`
-    + List<Item> getItems()
+  + List<Item> getItems()
+
 + `OrderService`
-    + Optional<Orders> CreateOrder(User,Item,Coupon.name)
+  + Optional<Orders> createOrder(User,Item,Coupon)
+  + boolean verifyOrder(Order)
+  + AcceptOrder(Order)
+
 + `CouponService`
-    + List<Coupon> getCouponInfo()
-    + boolean getCoupon(User,couponName);
+  + List<Coupon> getCouponInfo()
+  + boolean getCoupon(User,Coupon)
 
 ------------------------------
 
 ### 7. Design - Repository
 
-Repositories are based on Spring JPA
+Repositories are based on Spring Data JPA
 
 + UserRepository
 + ItemRepository
@@ -205,13 +209,9 @@ Repositories are based on Spring JPA
 > > --->ItemRepository
 >
 > OrderService
-> > --->UserRepository
->
-> > --->ItemRepository
->
 > > --->OrderRepository
 >
-> > --->CouponRepository
+> > --->CouponStateRepository
 >
 > CouponService
 > > --->CouponRepository
@@ -230,23 +230,32 @@ Table `User`
 + password
 + email
   > If user forget his password, he can retrieve it using this email.
++ account
+  > user's account (money)
+
+------------------------------------
+
+Table `Category`
+
++ (pk)
++ name
 
 ------------------------------------
 
 Table `Coupon`
 
-+ (pk)
-+ category
-  > We can split the columns into tables later if needed.
-+ discount_value
-  > This number refers to a quantitative discount value.
-+ name
-+ max_issue
-  > This indicates maximum issue-able number per user
+According to the discount policy, the coupon table is divided into two concrete classes.
 
++ (pk)
++ category(fk)
++ name
++ count
+  > This indicates maximum issue-able number per user
++ discountAmount / discountRate
+  > This number refers to a quantitative or rate discount value.
 ------------------------------------
 
-Table `ConponState`
+Table `CouponState`
 
 + (pk)
 + Coupon(fk)
@@ -261,8 +270,8 @@ Table `ConponState`
 Table `Item`
 
 + (pk)
-+ category
-+ amount
++ category(fk)
++ quantity
   > Amount currently available for purchase
 + price
   > Full price
@@ -276,3 +285,45 @@ Table `Order`
 + Item(fk)
 + Coupon(fk)
   > Foreign key's first Index is mean that Not using any coupon.
+
+### 10. Entity - Methods
+
+
+Table `User`
+
++ public static User createUser(String id, String name, String password, String email)
+
+
+
++ public void setAccount(Long account)
+
+
+------------------------------------
+
+Table `Coupon`
+
++ public abstract void changeDiscount(int amount);
+
++ public abstract int getDiscountValue(int itemPrice);
+
+------------------------------------
+
+Table `CouponState`
+
++ public static CouponState issueNewCoupon(User user, Coupon coupon)
+
++ public void issueCoupon()
+
++ public void refundCoupon()
+
++ public void useCoupon()
+
+------------------------------------
+
+Table `Item`
+
++ public static Item createItem(Category category, int quantity, int price)
+
++ public void sell()
+
+------------------------------------

@@ -3,6 +3,7 @@ package com.reserve.item.service;
 import com.reserve.item.domain.User;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,7 @@ public class UserServiceTest {
     UserService userService;
 
     @Test
+    @DisplayName("sdjk")
     public void 회원찾기() throws Exception {
         User user = new User();
         user.setEmail("lsh@naver.com");

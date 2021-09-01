@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class UserCoupon {
+public class CouponState {
     @Id @GeneratedValue
     @Column(name="USER_COUPON_ID")
     private long pk;

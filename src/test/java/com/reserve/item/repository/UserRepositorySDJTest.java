@@ -18,13 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(false)
 class UserRepositorySDJTest {
 
     @Autowired
-    UserRepositorySDJ userRepo;
-    @Autowired
-    UserRepository ur;
+    UserRepository userRepo;
+
     @Autowired
     EntityManager em;
 
@@ -37,8 +35,8 @@ class UserRepositorySDJTest {
         em.flush();
         em.clear();
 
-//        User find = userRepo.findByName("lsh").get();
-//        assertThat(find.getId()).isEqualTo(user.getId());
+        User find = userRepo.findByName("lsh").get();
+        assertThat(find.getId()).isEqualTo(user.getId());
     }
 
 

@@ -1,17 +1,10 @@
 package com.reserve.item.repository;
 
 import com.reserve.item.domain.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository {
-    void save(User user);
-    Optional<User> findByEmail(String email);
-    List<User> findAll();
-    Optional<User> findOne(String id);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByName(String name);
 }

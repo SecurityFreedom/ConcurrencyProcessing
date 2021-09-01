@@ -18,13 +18,14 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public Long join(User user) {
+        // 중복 검사 등 verify 필요. -> 적절하지 않으면 -1 반환.
         userRepository.save(user);
         return user.getPk();
     }
 
     @Override
-    public Object login(String id, String password) {
-        return null;
+    public Long login(String id, String password) {
+        return 1L;
     }
 
     @Override

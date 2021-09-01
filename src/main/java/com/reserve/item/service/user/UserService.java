@@ -5,6 +5,6 @@ import com.reserve.item.domain.User;
 
 public interface UserService {
     Long join(User user);
-    Object login(String id, String password);
+    Long login(String id, String password);
     boolean editUser(User preUser,Class<?> newName);
 }

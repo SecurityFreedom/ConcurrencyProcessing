@@ -55,8 +55,8 @@ public class OrderServiceImpl implements OrderService {
         Coupon coupon = orders.getCoupon();
         Optional<CouponState> couponStateOptional = couponStateRepository.findByUserAndCoupon(user, coupon);
         return couponStateOptional.map(couponState -> {
-            couponStateRepository.decreaseAmount(user,coupon);
-            orderRepository.create(orders);
+            couponState.useCoupon();
+            orderRepository.save(orders);
             return true;
         }).orElse(false);
     }

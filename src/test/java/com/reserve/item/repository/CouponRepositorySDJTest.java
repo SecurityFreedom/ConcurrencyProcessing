@@ -90,7 +90,7 @@ class CouponRepositorySDJTest {
         }
         em.flush();
         em.clear();
-        
+
         couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
         if(!couponstateByUserAndCoupon.isEmpty()){
             CouponState couponState = couponstateByUserAndCoupon.get();

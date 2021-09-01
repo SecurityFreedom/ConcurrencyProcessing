@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package com.reserve.item.service.coupon;
 //
 //import com.reserve.item.domain.Category;
@@ -18,6 +19,29 @@
 //
 //import static org.assertj.core.api.Assertions.assertThat;
 //
+=======
+package com.reserve.item.service.coupon;
+
+import com.reserve.item.domain.Category;
+import com.reserve.item.domain.Coupon;
+import com.reserve.item.domain.User;
+import com.reserve.item.repository.CouponRepository;
+import com.reserve.item.repository.CouponStateRepository;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+>>>>>>> 7a32ec4b5ebf34807d8cdfc1bb88119b5788e26e
 //@Transactional
 //@RequiredArgsConstructor
 //class CouponServiceImplTest {
@@ -87,6 +111,7 @@
 //        //Optional<CouponState> couponStateOptional = couponStateRepository.findByUserAndCoupon(user,coupon);
 //        //assertThat(couponStateOptional.isEmpty());
 //    }
+<<<<<<< HEAD
 //
 //    @Repository
 //    @Primary
@@ -115,4 +140,6 @@
 //        // 쿠폰의 갯수
 //        private int count;
 //    }
+=======
+>>>>>>> 7a32ec4b5ebf34807d8cdfc1bb88119b5788e26e
 //}

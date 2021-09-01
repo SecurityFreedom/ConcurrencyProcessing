@@ -25,19 +25,19 @@ import static org.junit.jupiter.      api.Assertions.*;
 @Transactional
 class CouponRepositorySDJTest {
     @Autowired
-    CouponRepositorySDJ couponRepo;
+    CouponRepository couponRepo;
 
     @Autowired
-    UserRepositorySDJ userRepo;
+    UserRepository userRepo;
 
     @Autowired
-    CouponStateRepositorySDJ csRepo;
+    CouponStateRepository csRepo;
 
     @Autowired
     EntityManager em;
 
     @Autowired
-    CategoryRepositorySDJ categoryRepositorySDJ;
+    CategoryRepository categoryRepositorySDJ;
 
     /*
      *  TEST DATABASE VALUES
@@ -125,7 +125,6 @@ class CouponRepositorySDJTest {
         CouponFixed cf = couponRepo.getFixedcouponByName("FIX쿠폰");
         // 검증
         Integer remainByUserAndCoupon = couponRepo.getRemainByUserAndCoupon(user, cf);
-
         assertThat(remainByUserAndCoupon).isEqualTo(9);
     }
 

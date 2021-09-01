@@ -22,11 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositorySDJTest {
 
     @Autowired
-    UserRepositorySDJ userRepo;
-    @Autowired
     UserJpaRepository jpaRepo;
-    @Autowired
-    UserRepository ur;
+
     @Autowired
     EntityManager em;
 

@@ -40,9 +40,9 @@ class ItemApplicationTests {
 		Category category = new Category();
 		category.setName("티켓");
 
-		CouponFixed c = CouponFixed.CreateCoupon("없음", category, 0, 0);
-		CouponFixed cf = CouponFixed.CreateCoupon("추석 쿠폰", category, 1000, 10);
-		CouponRate cr = CouponRate.CreateCoupon("가을 쿠폰", category, 10, 10);
+		CouponFixed c = CouponFixed.createCoupon("없음", category, 0, 0);
+		CouponFixed cf = CouponFixed.createCoupon("추석 쿠폰", category, 1000, 10);
+		CouponRate cr = CouponRate.createCoupon("가을 쿠폰", category, 10, 10);
 
 		CouponState couponState = CouponState.issueNewCoupon(user1, cf);
 

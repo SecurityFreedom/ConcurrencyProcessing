@@ -1,24 +1,19 @@
 package com.reserve.item.repository;
 
 import com.reserve.item.domain.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class UserRepositorySDJTest {
+class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepo;
@@ -38,7 +33,5 @@ class UserRepositorySDJTest {
         User find = userRepo.findByName("lsh").get();
         assertThat(find.getId()).isEqualTo(user.getId());
     }
-
-
 
 }

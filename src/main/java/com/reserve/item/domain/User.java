@@ -37,4 +37,8 @@ public class User {
         user.setAccount(100000000L);
         return user;
     }
+
+    public void setAccount(Long account){
+        this.account = account;
+    }
 }

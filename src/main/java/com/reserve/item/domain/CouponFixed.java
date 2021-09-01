@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 public class CouponFixed extends Coupon{
     private int discountAmount;
 
-    public static CouponFixed CreateCoupon(String name, Category category, int amount, int count){
+    public static CouponFixed createCoupon(String name, Category category, int amount, int count){
         CouponFixed c = new CouponFixed();
         c.setName(name);
         c.setCategory(category);

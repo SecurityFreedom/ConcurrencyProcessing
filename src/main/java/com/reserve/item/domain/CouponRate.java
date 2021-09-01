@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 public class CouponRate extends Coupon{
     private int discountRate;
 
-    public static CouponRate CreateCoupon(String name, Category category, int amount, int count){
+    public static CouponRate createCoupon(String name, Category category, int amount, int count){
         CouponRate c = new CouponRate();
         c.setName(name);
         c.setCategory(category);

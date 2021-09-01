@@ -3,9 +3,13 @@ import './App.css';
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import axios from "axios";
 import Header from './components/header/Header.jsx';
+import SubHeader from './components/subheader/SubHeader.jsx';
 import MainPage from "./components/mainpage/MainPage";
 import ItemPage from "./components/itempage/ItemPage";
 import MyPage from "./components/mypage/MyPage";
+
+
+
 
 function App() {
     const baseUrl = "http://localhost:8080";
@@ -41,8 +45,12 @@ function App() {
                         <Route path="/mypage">
                             <MyPage/>
                         </Route>
+                        <Route path="/login">
+                        </Route>
                     </Switch>
                 </section>
+                <hr/>
+                <SubHeader classname="subheader"></SubHeader>
             </BrowserRouter>
         </div>
     );

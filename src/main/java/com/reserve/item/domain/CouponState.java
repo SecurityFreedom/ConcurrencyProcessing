@@ -16,11 +16,11 @@ public class CouponState {
     @Column(name="USER_COUPON_ID")
     private long pk;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="COUPON_ID")
     private Coupon coupon;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USER_ID")
     private User user;
 

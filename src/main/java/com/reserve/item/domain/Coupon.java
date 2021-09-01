@@ -16,7 +16,7 @@ public abstract class Coupon {
     @Column(name="COUPON_ID")
     private long pk;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="CATEGORY_ID")
     private Category category;
     private String name;

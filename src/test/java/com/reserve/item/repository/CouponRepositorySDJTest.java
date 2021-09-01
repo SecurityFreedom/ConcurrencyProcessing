@@ -33,6 +33,9 @@ class CouponRepositorySDJTest {
     @Autowired
     EntityManager em;
 
+    @Autowired
+    CategoryRepositorySDJ categoryRepositorySDJ;
+
     @Test
     @DisplayName("이름으로 쿠폰 가져오기")
     public void 쿠폰발급() {
@@ -61,9 +64,28 @@ class CouponRepositorySDJTest {
     @Test
     @DisplayName("추가 발급 가능 갯수 조회")
     public void 추가발급갯수() {
-        User user = userRepo.getById(1L);
-        CouponFixed cf = couponRepo.getFixedcouponByName("추석 쿠폰");
+        // 유저 생성/저장
+        userRepo.save(User.createUser("Testid","name","password","email"));
+        Optional<User> optionalUser = userRepo.findByName("name");
+        assertThat(optionalUser.isPresent());
+        User user = optionalUser.get();
+
+        // 카테고리 생성/저장
+        Category category = new Category();
+        categoryRepositorySDJ.save(category);
+
+        // 쿠폰 생성/저장
+        Coupon coupon = CouponFixed.CreateCoupon("테스트쿠폰", category,1000,10);
+        couponRepo.save(coupon);
+        CouponFixed cf = couponRepo.getFixedcouponByName("테스트쿠폰");
+
+        // 쿠폰 State 생성/저장
+        CouponState couponState = CouponState.issueNewCoupon(user, coupon);
+        csRepo.save(couponState);
+
+       // 검증
         Integer remainByUserAndCoupon = couponRepo.getRemainByUserAndCoupon(user, cf);
+
         assertThat(remainByUserAndCoupon).isEqualTo(9);
     }
 
@@ -111,11 +133,24 @@ class CouponRepositorySDJTest {
     }
 
     @Test
+    @DisplayName("쿠폰 다 사용 후 다시 조회")
+    public void 쿠폰사용후조회(){
+        User user = userRepo.findById(1L).get();
+        CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
+
+        CouponState couponstate = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
+        couponstate.useCoupon();
+
+        CouponState afterUse = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
+        assertThat(afterUse.getCurrentAmount()).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("쿠폰 발급 목록")
     public void 쿠폰목록() {
         User user = userRepo.findById(1L).get();
         CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
-        List<Coupon> listByUser = couponRepo.getListByUser(user);
+        List<Coupon> listByUser = csRepo.getListByUser(user);
         for (Coupon coupon : listByUser) {
             System.out.println("[coupon : " + coupon.getName() + "]");
         }

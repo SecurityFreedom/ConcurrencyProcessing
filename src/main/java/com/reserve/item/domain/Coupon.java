@@ -28,4 +28,6 @@ public abstract class Coupon {
      * 할인율, 할인금액 변경 시 사용
      */
     public abstract void changeDiscount(int amount);
+
+    public abstract int getDiscountValue(int itemPrice);
 }

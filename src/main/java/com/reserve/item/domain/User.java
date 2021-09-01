@@ -26,6 +26,7 @@ public class User {
     private String name;
     private String password;
     private String email;
+    private Long account;
 
     public static User createUser(String id, String name, String password, String email) {
         User user = new User();
@@ -33,6 +34,7 @@ public class User {
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
+        user.setAccount(100000000L);
         return user;
     }
 }

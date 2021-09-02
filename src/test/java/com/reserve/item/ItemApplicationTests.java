@@ -58,5 +58,4 @@ class ItemApplicationTests {
 
 		couponStateRepo.save(couponState);
 	}
-
 }

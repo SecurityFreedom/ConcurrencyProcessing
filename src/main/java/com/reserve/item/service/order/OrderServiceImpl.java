@@ -2,7 +2,6 @@ package com.reserve.item.service.order;
 
 import com.reserve.item.domain.*;
 import com.reserve.item.repository.CouponRepository;
-import com.reserve.item.repository.CouponStateRepository;
 import com.reserve.item.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -72,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
     private boolean isAvailableMoney(User user, Coupon coupon, int price) {
         System.out.println("coupon.getDiscountValue() = " + coupon.getDiscountValue(price));
         System.out.println("user.getAccount() = " + user.getAccount());
-        
+
         return coupon.getDiscountValue(price) <= user.getAccount();
     }
 }

@@ -1,6 +1,5 @@
 package com.reserve.item.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
+@Setter
 @DiscriminatorValue("R")
 public class CouponRate extends Coupon{
     private int discountRate;

@@ -7,7 +7,8 @@ import SubHeader from './components/subheader/SubHeader.jsx';
 import MainPage from "./components/mainpage/MainPage";
 import ItemPage from "./components/itempage/ItemPage";
 import MyPage from "./components/mypage/MyPage";
-
+import LoginPage from "./components/login/LoginPage.jsx";
+import RegisterPage from "./components/register/RegisterPage.jsx"
 
 
 
@@ -46,6 +47,10 @@ function App() {
                             <MyPage/>
                         </Route>
                         <Route path="/login">
+                            <LoginPage/>
+                        </Route>
+                        <Route path="/register">
+                            <RegisterPage/>
                         </Route>
                     </Switch>
                 </section>

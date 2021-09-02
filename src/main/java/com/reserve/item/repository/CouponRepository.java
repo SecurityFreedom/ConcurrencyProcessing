@@ -24,7 +24,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
     Integer getRemainByUserAndCoupon(@Param("user")User user, @Param("coupon")Coupon coupon);
 
     //유저가 발급받은 쿠폰 목록
-    //테스트 필요
     @Query("select s.coupon from CouponState s where s.user = :user")
     List<Coupon> getListByUser(@Param("user")User user);
 

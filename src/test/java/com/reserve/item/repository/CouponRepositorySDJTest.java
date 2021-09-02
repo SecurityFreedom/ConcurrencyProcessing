@@ -72,10 +72,10 @@ class CouponRepositorySDJTest {
         categoryRepositorySDJ.save(category);
 
         // 쿠폰 생성/저장
-        Coupon coupon = CouponFixed.CreateCoupon("FIX쿠폰", category,1000,10);
+        Coupon coupon = CouponFixed.createCoupon("FIX쿠폰", category,1000,10);
         couponRepo.save(coupon);
 
-        Coupon coupon2 = CouponRate.CreateCoupon("RATE쿠폰", category,10,10);
+        Coupon coupon2 = CouponRate.createCoupon("RATE쿠폰", category,10,10);
         couponRepo.save(coupon2);
 
         // 쿠폰 State 생성/저장
@@ -177,8 +177,8 @@ class CouponRepositorySDJTest {
     @Test
     @DisplayName("쿠폰 다 사용 후 다시 조회")
     public void 쿠폰사용후조회(){
-        User user = userRepo.findById(1L).get();
-        CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
+        User user = userRepo.findByName("name").get();
+        CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
 
         CouponState couponstate = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
         couponstate.useCoupon();

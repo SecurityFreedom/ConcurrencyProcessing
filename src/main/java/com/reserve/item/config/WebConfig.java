@@ -18,6 +18,5 @@ public class WebConfig implements WebMvcConfigurer {
                         HttpMethod.DELETE.name(),
                         HttpMethod.PUT.name()
                 );
-        WebMvcConfigurer.super.addCorsMappings(registry);
     }
 }

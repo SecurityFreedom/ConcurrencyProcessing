@@ -15,11 +15,11 @@ const RegisterPage = () => {
             console.log("패스워드/패스워드 체크 불일치");
             return setPasswordError(true);
         }
-        axios.post("localhost:8080/register",{
+        axios.post("http://localhost:8080/register",{
             name:name,
             id:id,
             password:password,
-            email:email,
+            email:email
         })
             .then(function(response){
                 console.log("success");

@@ -2,6 +2,7 @@ package com.reserve.item.service.user;
 
 import com.reserve.item.domain.User;
 import com.reserve.item.repository.UserRepository;
+import com.reserve.item.service.user.register.RegisterPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final RegisterPolicy registerPolicy;
 
     @Override
     @Transactional
@@ -28,6 +30,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean editUser(User preUser,Class<?> newName){
         ////////////////////////////
+        return false;
+    }
+
+    @Override
+    public boolean verifyJoinUserInfo(User user) {
+        user.getId();
         return false;
     }
 }

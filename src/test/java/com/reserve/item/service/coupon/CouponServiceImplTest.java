@@ -70,13 +70,14 @@ class CouponServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 5);
+        Coupon coupon = CouponFixed.createCoupon("name", category, 1000, 5);
         couponRepository.save(coupon);
 
         //WHEN
         assertThat(couponRepository.getCouponstateByUserAndCoupon(user, coupon)).isEmpty();
 
         //THEN
+        System.out.println("coupon.getClass().getSimpleName() = " + coupon.getClass().getSimpleName());
         assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
     }
 
@@ -92,7 +93,7 @@ class CouponServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 5);
+        Coupon coupon = CouponFixed.createCoupon("name", category, 1000, 5);
         couponRepository.save(coupon);
 
         //WHEN & THEN
@@ -115,7 +116,7 @@ class CouponServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 1);
+        Coupon coupon = CouponFixed.createCoupon("name", category, 1000, 1);
         couponRepository.save(coupon);
 
         //WHEN & THEN

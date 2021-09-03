@@ -16,6 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemServiceImplTest {
 
     @Autowired
+    ItemService itemService;
+
+    @Autowired
     ItemRepository itemRepository;
 
     @Autowired
@@ -33,6 +36,6 @@ class ItemServiceImplTest {
         Item item2 = Item.createItem(category, 250, 19900);
         itemRepository.save(item2);
 
-        assertThat(itemRepository.findAll().size()).isEqualTo(2);
+        assertThat(itemService.getItems().size()).isEqualTo(2);
     }
 }

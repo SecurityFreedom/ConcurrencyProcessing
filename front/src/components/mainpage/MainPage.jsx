@@ -1,10 +1,8 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import "./mainpage.scss";
 const MainPage = () => {
     return (
-        <div>
-            <h1>Main!</h1>
-        </div>
+                <h1>Welcome</h1>
     );
 };
 

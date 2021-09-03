@@ -15,23 +15,20 @@ const Header = () => {
     return (
         <div className="header">
             <span className="logoName">
-                <FontAwesomeIcon className="header__logo" icon={faJedi} spin={true}></FontAwesomeIcon>
-                <h2 className="header__title">Concurrency</h2>
+                <h2 className="header__title">Project Concurrency</h2>
             </span>
 
             <span className="menus" onClick={clickHandler}>
                 <li className="li"><Link className="menus__item" to="/">메인</Link></li>
+                <li className="li"><Link className="menus__item" to="/login">로그인</Link></li>
+                <li className="li"><Link className="menus__item" to="/register">회원가입</Link></li>
+                <li className="li"><Link className="menus__item" to="/cart">장바구니</Link></li>
+                <li className="li"><Link className="menus__item" to="/orderlist">주문조회</Link></li>
                 <li className="li"><Link className="menus__item" to="/items">상품목록</Link></li>
                 <li className="li"><Link className="menus__item" to="/mypage">마이페이지</Link></li>
-                <li className="li">
-                    <Link className="menus__item" to="/mypage">
-                        <FontAwesomeIcon className="header__logo" icon={faShoppingCart}></FontAwesomeIcon>
-                        <span className="cart__item_num">0</span>
-                    </Link>
-                </li>
-
             </span>
         </div>
+
     );
 }
 

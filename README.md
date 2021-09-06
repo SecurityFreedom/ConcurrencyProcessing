@@ -170,21 +170,21 @@ java -jar ./${SNAPSHOT}.jar
 ### 6. Design - Service
 
 + `UserService`
-  + void user(User)
-  + JWT login(User.id, User.pw)
-  + boolean editUser(User)
+    + void user(User)
+    + JWT login(User.id, User.pw)
+    + boolean editUser(User)
 
 + `ItemService`
-  + List<Item> getItems()
+    + List<Item> getItems()
 
 + `OrderService`
-  + Optional<Orders> createOrder(User,Item,Coupon)
-  + boolean verifyOrder(Order)
-  + AcceptOrder(Order)
+    + Optional<Orders> createOrder(User,Item,Coupon)
+    + boolean verifyOrder(Order)
+    + AcceptOrder(Order)
 
 + `CouponService`
-  + List<Coupon> getCouponInfo()
-  + boolean getCoupon(User,Coupon)
+    + List<Coupon> getCouponInfo()
+    + boolean getCoupon(User,Coupon)
 
 ------------------------------
 
@@ -244,7 +244,7 @@ Table `Category`
 
 Table `Coupon`
 
-According to the discount policy, the coupon table is divided into two concrete classes.
+According to the discount policy, the coupon table is divided into two concrete classes. 
 
 + (pk)
 + category(fk)

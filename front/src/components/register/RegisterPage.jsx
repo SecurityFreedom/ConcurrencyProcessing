@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import "./registerpage.scss";
+import MainPage from "../mainpage/MainPage.jsx";
 import axios from 'axios';
 
 const RegisterPage = () => {
@@ -10,22 +11,30 @@ const RegisterPage = () => {
     const [email, setEmail] = useState("");
     const [passwordError, setPasswordError] = useState(false);
     const onSubmit = e => {
+        console.log(password);
         e.preventDefault();
         if (password !== passwordCheck) {
             console.log("패스워드/패스워드 체크 불일치");
             return setPasswordError(true);
         }
-        axios.post("localhost:8080/register",{
+        axios.post("http://localhost:8080/register",{
             name:name,
             id:id,
             password:password,
             email:email,
         })
             .then(function(response){
-                console.log("success");
+               if(response.data=="OK"){
+                   alert("회원가입이 성공하였습니다.");
+                   return MainPage;
+               }
+               else{
+                   alert("실패하였습니다");
+               }
             })
             .catch(function(error){
                 console.log("fail");
+                alert("잠시 후 다시 시도해주세요");
             });
 
     };

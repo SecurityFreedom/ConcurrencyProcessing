@@ -1,8 +1,35 @@
 import React, {useState} from 'react';
 import "./loginpage.scss";
+import axios from "axios";
 const LoginPage = () => {
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+    const onSubmit = e => {
+        console.log(password);
+        e.preventDefault();
+        axios.post("http://localhost:8080/login",{
+            id:id,
+            password:password,
+        })
+            .then(function(response){
+                if(response.data=="ok") {
+                    alert("success");
+                }
+            })
+            .catch(function(error){
+                console.log("fail");
+                alert("fail");
+            });
 
+    };
+    const onChangeId = e => {
+        setId(e.target.value);
+        console.log(e.target.value);
+    };
 
+    const onChangePassword = e => {
+        setPassword(e.target.value);
+    };
     return (
         <div className="login">
                 <h2>Log-in</h2>
@@ -13,11 +40,11 @@ const LoginPage = () => {
                 </div>
             <div className="login_id">
                 <h4>ID</h4>
-                <input type="id" name="" id="" placeholder="id"/>
+                <input type="id" name="" id="" value={id} onChange={onChangeId} placeholder="id"/>
             </div>
             <div className="login_pw">
                 <h4>Password</h4>
-                <input type="password" name="" id="" placeholder="Password"/>
+                <input type="password" name="" id="" value={password} onChange={onChangePassword} placeholder="Password"/>
             </div>
             <div className="login_etc">
                 <div className="checkbox">
@@ -28,7 +55,7 @@ const LoginPage = () => {
                 </div>
             </div>
             <div className="submit">
-                <input type="submit" value="submit"/>
+                <button onClick={onSubmit}>Login</button>
             </div>
         </div>
     );

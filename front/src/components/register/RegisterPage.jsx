@@ -21,7 +21,7 @@ const RegisterPage = () => {
             name:name,
             id:id,
             password:password,
-            email:email,
+            email:email
         })
             .then(function(response){
                if(response.data=="OK"){

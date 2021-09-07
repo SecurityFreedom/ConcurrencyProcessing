@@ -8,7 +8,10 @@ import com.reserve.item.service.item.ItemService;
 import com.reserve.item.service.order.OrderService;
 import com.reserve.item.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,12 +28,19 @@ public class OrderController {
         Long item_pk = orderForm.getItem_pk();
         Long coupon_pk = orderForm.getCoupon_pk();
 
-        User user = userService.findByUserId(userId);
+        User user = userService.findUserById(userId);
         Item item = itemService.findItemByPk(item_pk);
-        Coupon coupon = couponService.findCouponByPk(coupon_pk);
+        Coupon coupon = couponService.findCouponById(coupon_pk);
 
-
-        orderService.createOrder(user, item, coupon);
+        return orderService.createOrder(user, item, coupon).map(
+                (orders)->{
+                    if(orderService.verifyOrder(orders)){
+                        orderService.acceptOrder(orders);
+                        return "OK";
+                    }
+                    return "VERIFY ORDER ERROR";
+                }
+        ).orElse("CREATE ORDER ERROR");
     }
 
 }

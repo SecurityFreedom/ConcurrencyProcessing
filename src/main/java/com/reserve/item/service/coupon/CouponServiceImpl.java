@@ -3,6 +3,7 @@ package com.reserve.item.service.coupon;
 import com.reserve.item.domain.Coupon;
 import com.reserve.item.domain.CouponState;
 import com.reserve.item.domain.User;
+import com.reserve.item.dto.CouponInfoDTO;
 import com.reserve.item.repository.CouponRepository;
 import com.reserve.item.repository.CouponStateRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,16 @@ public class CouponServiceImpl implements CouponService {
             couponStateRepository.save(couponState);
             return true;
         });
+    }
+
+    @Override
+    public List<CouponInfoDTO> getUserCoupon(User user) {
+        return couponStateRepository.getListByUser(user);
+    }
+
+    @Override
+    public Coupon findCouponById(Long id) {
+        Optional<Coupon> byId = couponRepository.findById(id);
+        return byId.orElse(null);
     }
 }

@@ -15,9 +15,7 @@ public class UserController {
 
     @PostMapping(value = {"/register"})
     @ResponseBody
-    public String processTest(
-            @RequestBody UserRegisterForm userRegisterForm){
-
+    public String processTest(@RequestBody UserRegisterForm userRegisterForm) {
         String id = userRegisterForm.getId();
         String name = userRegisterForm.getName();
         String password = userRegisterForm.getPassword();

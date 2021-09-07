@@ -3,6 +3,7 @@ package com.reserve.item.repository;
 import com.reserve.item.domain.Coupon;
 import com.reserve.item.domain.CouponState;
 import com.reserve.item.domain.User;
+import com.reserve.item.dto.CouponInfoDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +15,9 @@ public interface CouponStateRepository extends JpaRepository<CouponState,Long> {
 
     //유저가 발급받은 쿠폰 목록
     //테스트 필요
-    @Query("select s.coupon from CouponState s where s.user = :user")
-    List<Coupon> getListByUser(@Param("user") User user);
+    @Query("select new com.reserve.item.dto.CouponInfoDTO(s.currentAmount, c.name) from CouponState s join s.coupon c where s.user = :user")
+    List<CouponInfoDTO> getListByUser(@Param("user") User user);
+
     Optional<CouponState> findByUserAndCoupon(User user, Coupon coupon);
 
 //    void create(User user, Coupon coupon);  // 레코드 생성. (user, coupon, 1 , 1) 쿠폰을 발급 받는 것.

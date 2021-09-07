@@ -49,4 +49,10 @@ public class UserServiceImpl implements UserService{
 
         return false;
     }
+
+    @Override
+    public User findUserById(String id) {
+        Optional<User> user = userRepository.findByUserid(id);
+        return user.orElse(null);
+    }
 }

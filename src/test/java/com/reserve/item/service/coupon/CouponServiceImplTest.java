@@ -9,10 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -122,4 +125,68 @@ class CouponServiceImplTest {
         assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
         assertThat(couponService.getCoupon(user, coupon)).isEqualTo(false);
     }
+
+
+    // Integrity 보장 X -> JPA 에서 안된다고 하는 듯.
+    @Test
+    @Transactional
+    @DisplayName("쿠폰에 동시 접근 테스트")
+    public void 동시접근테스트() throws InterruptedException {
+        User user = User.createUser("TESTid", "TESTname", "TESTpassword", "TESTemail");
+        userRepository.save(user);
+
+        Category category = new Category();
+        categoryRepository.save(category);
+
+        Coupon coupon = CouponFixed.createCoupon("음식쿠폰",category,1000,5);
+        couponRepository.save(coupon);
+
+
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        CountDownLatch latch = new CountDownLatch(10);
+        for (int i = 0; i < 10; i++) {
+            service.execute(() -> {
+                assertThrows(DataIntegrityViolationException.class, ()->{
+                    couponService.getCoupon(user, coupon);
+                });
+//                couponService.getCoupon(user, coupon);
+                latch.countDown();
+            });
+        }
+        latch.await();
+
+        //assertThat(couponService.getUserCoupon(user).get(0).getCurrentAmount()).isEqualTo(5);
+
+    }
+
+
+
+    //CONCURRENCY TEST CODE (REFERENCE)
+
+//    @Test
+//    public void testCounterWithConcurrency() throws InterruptedException {
+//        int numberOfThreads = 10;
+//        ExecutorService service = Executors.newFixedThreadPool(10);
+//        CountDownLatch latch = new CountDownLatch(numberOfThreads);
+//        MyCounter counter = new MyCounter();
+//        for (int i = 0; i < numberOfThreads; i++) {
+//            service.execute(() -> {
+//                counter.increment();
+//                latch.countDown();
+//            });
+//        }
+//        latch.await();
+//        assertThat(numberOfThreads).isEqualTo(counter.getCount());
+//    }
+//
+//    @Getter
+//    public class MyCounter {
+//        private int count;
+//        public void increment() {
+//            int temp = count;
+//            count = temp + 1;
+//        }
+//    }
+
+
 }

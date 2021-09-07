@@ -11,9 +11,11 @@ import lombok.Getter;
 public class CouponInfoDTO {
     private String couponname;
     private int currentAmount;
+    private Long pk;
 
-    public CouponInfoDTO(int currentAmount, String name) {
+    public CouponInfoDTO(int currentAmount, String name, Long pk) {
         this.currentAmount = currentAmount;
         couponname = name;
+        this.pk =pk;
     }
 }

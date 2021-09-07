@@ -134,6 +134,15 @@ class CouponRepositoryTest {
         Optional<CouponState> couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
         assertThat(couponstateByUserAndCoupon.isPresent());
     }
+    @Test
+    @DisplayName("발급 정보 조회2")
+    @Transactional
+    public void 조회2() {
+        User user = userRepo.findByName("name").get();
+        CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
+        csRepo.
+
+    }
 
     @Test
     @DisplayName("회원에게 발급 상태 확인 후 추가 발급")
@@ -184,4 +193,5 @@ class CouponRepositoryTest {
         //현재 발급은 하나만 된 상태.
         assertThat(listByUser.size()).isEqualTo(2);
     }
+
 }

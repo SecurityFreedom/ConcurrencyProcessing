@@ -27,10 +27,10 @@ class ItemServiceImplTest {
         category.setName("테스트카테고리");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 39900);
+        Item item = Item.createItem(category, 100, 39900, "아이템1");
         itemRepository.save(item);
 
-        Item item2 = Item.createItem(category, 250, 19900);
+        Item item2 = Item.createItem(category, 250, 19900, "아이템2");
         itemRepository.save(item2);
 
         assertThat(itemRepository.findAll().size()).isEqualTo(2);

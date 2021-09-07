@@ -8,7 +8,6 @@ const ItemPage = () => {
             const gettingItem = await axios.get('http://localhost:8080/items');
             console.log(gettingItem);
         }
-
         getItems();
     });
 

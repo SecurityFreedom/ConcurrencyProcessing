@@ -48,7 +48,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 19900);
+        Item item = Item.createItem(category, 100, 19900,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -68,7 +68,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 19900);
+        Item item = Item.createItem(category, 100, 19900, "item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -94,7 +94,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 19900);
+        Item item = Item.createItem(category, 100, 19900, "item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -121,7 +121,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 20000);
+        Item item = Item.createItem(category, 100, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -147,7 +147,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 20000);
+        Item item = Item.createItem(category, 100, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -174,7 +174,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 20000);
+        Item item = Item.createItem(category, 100, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponRate.createCoupon("겨울맞이쿠폰", category, 10, 3);
@@ -200,7 +200,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 20000);
+        Item item = Item.createItem(category, 100, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -228,7 +228,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 20000);
+        Item item = Item.createItem(category, 100, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponRate.createCoupon("겨울맞이쿠폰", category, 10, 3);
@@ -254,7 +254,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 0, 20000);
+        Item item = Item.createItem(category, 0, 20000,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);
@@ -284,7 +284,7 @@ class OrderServiceImplTest {
         category2.setName("필기구");
         categoryRepository.save(category2);
 
-        Item item = Item.createItem(category, 100, 19900);
+        Item item = Item.createItem(category, 100, 19900,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category2, 1000, 3);
@@ -311,7 +311,7 @@ class OrderServiceImplTest {
         category.setName("음식");
         categoryRepository.save(category);
 
-        Item item = Item.createItem(category, 100, 19900);
+        Item item = Item.createItem(category, 100, 19900,"item");
         itemRepository.save(item);
 
         Coupon coupon = CouponFixed.createCoupon("겨울맞이쿠폰", category, 1000, 3);

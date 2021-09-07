@@ -29,10 +29,7 @@ public class UserServiceImpl implements UserService{
         Optional<User> byUserid = userRepository.findByUserid(id);
         if(byUserid.isPresent()){
             User user = byUserid.get();
-            if (user.getPassword() == password)
-                return true;
-            else
-                return false;
+            return user.getPassword().equals(password);
         } else {
             return false;
         }

@@ -12,6 +12,7 @@ const LoginPage = () => {
             password:password,
         })
             .then(function(response){
+                console.log(response);
                 if(response.data=="ok") {
                     alert("success");
                 }

@@ -24,6 +24,7 @@ const RegisterPage = () => {
             email:email
         })
             .then(function(response){
+               console.log(response);
                if(response.data=="OK"){
                    alert("회원가입이 성공하였습니다.");
                    return MainPage;

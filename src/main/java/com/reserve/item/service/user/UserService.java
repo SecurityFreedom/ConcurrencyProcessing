@@ -8,4 +8,5 @@ public interface UserService {
     boolean login(String id, String password);
     boolean editUser(User preUser,Class<?> newName);
     boolean isDuplicate(User user);
+    User findUserById(String id);
 }

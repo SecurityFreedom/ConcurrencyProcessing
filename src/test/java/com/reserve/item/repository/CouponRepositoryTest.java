@@ -2,6 +2,7 @@ package com.reserve.item.repository;
 
 import com.reserve.item.domain.*;
 import com.reserve.item.domain.exceptions.NotEnoughCouponException;
+import com.reserve.item.dto.CouponInfoDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -134,6 +135,14 @@ class CouponRepositoryTest {
         Optional<CouponState> couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
         assertThat(couponstateByUserAndCoupon.isPresent());
     }
+    @Test
+    @DisplayName("발급 정보 조회2")
+    @Transactional
+    public void 조회2() {
+        User user = userRepo.findByName("name").get();
+        List<CouponInfoDTO> listByUser = csRepo.getListByUser(user);
+        assertThat(listByUser.size()).isEqualTo(2);
+    }
 
     @Test
     @DisplayName("회원에게 발급 상태 확인 후 추가 발급")
@@ -184,4 +193,5 @@ class CouponRepositoryTest {
         //현재 발급은 하나만 된 상태.
         assertThat(listByUser.size()).isEqualTo(2);
     }
+
 }

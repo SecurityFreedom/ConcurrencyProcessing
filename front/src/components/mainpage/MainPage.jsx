@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
 import "./mainpage.scss";
 const MainPage = () => {
+
+
     return (
-                <h1>Welcome</h1>
+        <div className="title">
+            <h1 className="front">FRONT END</h1>
+            <p className="main">Main Page</p>
+
+        </div>
     );
 };
 

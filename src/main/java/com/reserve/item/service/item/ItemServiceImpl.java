@@ -18,4 +18,9 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getItems() {
         return itemRepository.findAll();
     }
+
+    @Override
+    public Item findItemByPk(Long item_pk) {
+        return itemRepository.findById(item_pk).orElse(null);
+    }
 }

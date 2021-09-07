@@ -1,5 +1,6 @@
 package com.reserve.item;
 
+import com.reserve.item.domain.*;
 import com.reserve.item.repository.CategoryRepository;
 import com.reserve.item.repository.CouponRepository;
 import com.reserve.item.repository.CouponStateRepository;
@@ -32,30 +33,29 @@ class ItemApplicationTests {
 	 * */
 	@Test
 	void insertValues() {
-//		User user1 = User.createUser("id1", "강윤식", "1234", "sik@naver.com");
-//		User user2 = User.createUser("idid2", "이승환", "4321", "nlsh@naver.com");
-//		User user3 = User.createUser("idd3", "성원영", "3412", "10@naver.com");
-//
-//		Category category = new Category();
-//		category.setName("티켓");
-//
-//		CouponFixed c = CouponFixed.CreateCoupon("없음", category, 0, 0);
-//		CouponFixed cf = CouponFixed.CreateCoupon("추석 쿠폰", category, 1000, 10);
-//		CouponRate cr = CouponRate.CreateCoupon("가을 쿠폰", category, 10, 10);
-//
-//		CouponState couponState = CouponState.issueNewCoupon(user1, cf);
-//
-//		userRepo.save(user1);
-//		userRepo.save(user2);
-//		userRepo.save(user3);
-//
-//		categoryRepo.save(category);
-//
-//		couponRepo.save(c);
-//		couponRepo.save(cf);
-//		couponRepo.save(cr);
-//
-//		couponStateRepo.save(couponState);
-	}
+		User user1 = User.createUser("id1", "강윤식", "1234", "sik@naver.com");
+		User user2 = User.createUser("idid2", "이승환", "4321", "nlsh@naver.com");
+		User user3 = User.createUser("idd3", "성원영", "3412", "10@naver.com");
 
+		Category category = new Category();
+		category.setName("티켓");
+
+		CouponFixed c = CouponFixed.createCoupon("없음", category, 0, 0);
+		CouponFixed cf = CouponFixed.createCoupon("추석 쿠폰", category, 1000, 10);
+		CouponRate cr = CouponRate.createCoupon("가을 쿠폰", category, 10, 10);
+
+		CouponState couponState = CouponState.issueNewCoupon(user1, cf);
+
+		userRepo.save(user1);
+		userRepo.save(user2);
+		userRepo.save(user3);
+
+		categoryRepo.save(category);
+
+		couponRepo.save(c);
+		couponRepo.save(cf);
+		couponRepo.save(cr);
+
+		couponStateRepo.save(couponState);
+	}
 }

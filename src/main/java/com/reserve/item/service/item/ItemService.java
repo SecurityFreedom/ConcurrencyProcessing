@@ -1,7 +1,6 @@
-package com.reserve.item.service;
+package com.reserve.item.service.item;
 
 import com.reserve.item.domain.Item;
-
 import java.util.List;
 
 public interface ItemService {

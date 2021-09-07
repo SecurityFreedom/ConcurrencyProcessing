@@ -1,10 +1,7 @@
 package com.reserve.item.domain;
 
 import com.reserve.item.domain.exceptions.NotEnoughCouponException;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 

@@ -1,118 +1,125 @@
-//package com.reserve.item.service.coupon;
-//
-//import com.reserve.item.domain.Category;
-//import com.reserve.item.domain.Coupon;
-//import com.reserve.item.domain.User;
-//import com.reserve.item.repository.CouponStateRepository;
-//import lombok.Getter;
-//import lombok.RequiredArgsConstructor;
-//import lombok.Setter;
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.context.annotation.Primary;
-//import org.springframework.stereotype.Repository;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-//@Transactional
-//@RequiredArgsConstructor
-//class CouponServiceImplTest {
-//    TestCouponRepository couponRepository = new TestCouponRepository();
-//    CouponStateRepository couponStateRepository;
-//
-//    @Test
-//    @DisplayName("쿠폰 모두 가져오기")
-//    void getCouponInfo() {
-//        Coupon coupon1 = new Coupon() {
-//            @Override
-//            public void changeDiscount(int amount) {
-//            }
-//
-//            @Override
-//            public int getDiscountValue(int itemPrice) {
-//                return 0;
-//            }
-//        };
-//
-//        Coupon coupon2 = new Coupon() {
-//            @Override
-//            public void changeDiscount(int amount) {
-//            }
-//
-//            @Override
-//            public int getDiscountValue(int itemPrice) {
-//                return 0;
-//            }
-//        };
-//
-//        couponRepository.addCoupon(coupon1);
-//        couponRepository.addCoupon(coupon2);
-//
-//        assertThat(couponRepository.findAll().size()).isEqualTo(2);
-//    }
-//
-//    @Test
-//    @DisplayName("쿠폰 발급 받기 - 현재 발급 / 제한 발급 비교")
-//    void getCoupon() {
-//        TestCoupon testCoupon = new TestCoupon();
-//        testCoupon.setCount(3);
-//        assertThat(2).isLessThan(testCoupon.getCount());
-//    }
-//
-//    @Test
-//    @DisplayName("쿠폰 발급 받기 - 쿠폰을 받은 적이 없을 때")
-//    void getCouponX() {
-//        Coupon coupon = new Coupon() {
-//            @Override
-//            public void changeDiscount(int amount) {
-//
-//            }
-//
-//            @Override
-//            public int getDiscountValue(int itemPrice) {
-//                return 0;
-//            }
-//        };
-//
-//        User user = User.createUser("id","name","password","email@email.com");
-//
-//        /////////////////////////////////////////////
-//        /// couponStateRepository 구현 후 주석 제거. ///
-//        /////////////////////////////////////////////
-//
-//        //Optional<CouponState> couponStateOptional = couponStateRepository.findByUserAndCoupon(user,coupon);
-//        //assertThat(couponStateOptional.isEmpty());
-//    }
-//
-//    @Repository
-//    @Primary
-//    class TestCouponRepository implements CouponRepository{
-//        List<Coupon> list = new ArrayList<>();
-//
-//        public void addCoupon(Coupon coupon){
-//            list.add(coupon);
-//        }
-//
-//        @Override
-//        public List<Coupon> findAll() {
-//            return list;
-//        }
-//    }
-//
-//
-//    @Setter
-//    @Getter
-//    public class TestCoupon {
-//        private long pk;
-//
-//        private Category category;
-//        private String name;
-//
-//        // 쿠폰의 갯수
-//        private int count;
-//    }
-//}
+package com.reserve.item.service.coupon;
+
+import com.reserve.item.domain.*;
+import com.reserve.item.repository.CategoryRepository;
+import com.reserve.item.repository.CouponRepository;
+import com.reserve.item.repository.CouponStateRepository;
+import com.reserve.item.repository.UserRepository;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
+@Transactional
+class CouponServiceImplTest {
+
+    @Autowired
+    CouponService couponService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CouponRepository couponRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    CouponStateRepository couponStateRepository;
+
+    @Test
+    @DisplayName("쿠폰의 전체 개수 확인")
+    @Transactional
+    void 전체쿠폰확인() {
+        //GIVEN
+        Category category = new Category();
+        category.setName("테스트카테고리");
+        categoryRepository.save(category);
+
+        CouponFixed couponFixed = CouponFixed.createCoupon("FIX쿠폰", category, 1000, 5);
+        couponRepository.save(couponFixed);
+
+        CouponRate couponRate = CouponRate.createCoupon("RATE쿠폰", category, 15, 3);
+        couponRepository.save(couponRate);
+
+        //WHEN
+        List<Coupon> list = couponService.getCouponInfo();
+
+        //THEN
+        assertThat(list.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("사용자가 처음 쿠폰 발급")
+    @Transactional
+    void 쿠폰받기() {
+        //GIVEN
+        User user = User.createUser("id", "name", "password", "email");
+        userRepository.save(user);
+
+        Category category = new Category();
+        category.setName("음식");
+        categoryRepository.save(category);
+
+        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 5);
+        couponRepository.save(coupon);
+
+        //WHEN
+        assertThat(couponRepository.getCouponstateByUserAndCoupon(user, coupon)).isEmpty();
+
+        //THEN
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("사용자가 쿠폰을 보유하고, 추가 발급 요청")
+    @Transactional
+    void 쿠폰받기2() {
+        //GIVEN
+        User user = User.createUser("id", "name", "password", "email");
+        userRepository.save(user);
+
+        Category category = new Category();
+        category.setName("음식");
+        categoryRepository.save(category);
+
+        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 5);
+        couponRepository.save(coupon);
+
+        //WHEN & THEN
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("사용자가 한도 이상의 쿠폰을 요구")
+    @Transactional
+    void 쿠폰받기3() {
+        //GIVEN
+        User user = User.createUser("id", "name", "password", "email");
+        userRepository.save(user);
+
+        Category category = new Category();
+        category.setName("음식");
+        categoryRepository.save(category);
+
+        CouponFixed coupon = CouponFixed.createCoupon("name", category, 1000, 1);
+        couponRepository.save(coupon);
+
+        //WHEN & THEN
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(true);
+        assertThat(couponService.getCoupon(user, coupon)).isEqualTo(false);
+    }
+}

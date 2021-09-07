@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class UserRepositorySDJTest {
+class UserRepositoryTest {
 
     @Autowired
-    UserRepository jpaRepo;
+    UserRepository userRepo;
 
     @Autowired
     EntityManager em;
@@ -24,14 +24,14 @@ class UserRepositorySDJTest {
     @Test
     @DisplayName("회원 등록 & 이름으로 찾기")
     public void 회원추가_찾기() {
-//        User user = User.createUser("my id", "lsh", "1234", "heheh22Dd");
-//        userRepo.save(user);
+        User user = User.createUser("my id", "lsh", "1234", "heheh22Dd");
+        userRepo.save(user);
 
-        User find = jpaRepo.findByName("이승환").orElse(null);
-        if(find != null) System.out.println("find.getName() = " + find.getName());
-        else System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
+        em.flush();
+        em.clear();
+
+        User find = userRepo.findByName("lsh").get();
+        assertThat(find.getId()).isEqualTo(user.getId());
     }
-
-
 
 }

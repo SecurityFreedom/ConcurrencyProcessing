@@ -2,6 +2,7 @@ package com.reserve.item.repository;
 
 import com.reserve.item.domain.*;
 import com.reserve.item.domain.exceptions.NotEnoughCouponException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,11 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.      api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class CouponRepositorySDJTest {
+class CouponRepositoryTest {
     @Autowired
     CouponRepository couponRepo;
 
@@ -32,7 +33,7 @@ class CouponRepositorySDJTest {
     EntityManager em;
 
     @Autowired
-    CategoryRepository categoryRepositorySDJ;
+    CategoryRepository categoryRepository;
 
     /*
      *  TEST DATABASE VALUES
@@ -56,7 +57,7 @@ class CouponRepositorySDJTest {
      *      2L      1L(user)    2L(coupon)
      */
     @BeforeEach
-    void 데이터베이스_테스트_추가(){
+    void 데이터베이스_테스트_추가() {
         // 유저 생성/저장
         User user = User.createUser("Testid", "name", "password", "email");
         userRepo.save(user);
@@ -64,13 +65,13 @@ class CouponRepositorySDJTest {
         // 카테고리 생성/저장
         Category category = new Category();
         category.setName("카테고리이름");
-        categoryRepositorySDJ.save(category);
+        categoryRepository.save(category);
 
         // 쿠폰 생성/저장
-        Coupon coupon = CouponFixed.CreateCoupon("FIX쿠폰", category,1000,10);
+        Coupon coupon = CouponFixed.createCoupon("FIX쿠폰", category, 1000, 10);
         couponRepo.save(coupon);
 
-        Coupon coupon2 = CouponRate.CreateCoupon("RATE쿠폰", category,10,10);
+        Coupon coupon2 = CouponRate.createCoupon("RATE쿠폰", category, 10, 10);
         couponRepo.save(coupon2);
 
         // 쿠폰 State 생성/저장
@@ -114,19 +115,20 @@ class CouponRepositorySDJTest {
     @Transactional
     public void 추가발급갯수() {
         Optional<User> optionalUser = userRepo.findByName("name");
-        assertThat(optionalUser.isPresent());
+        assertThat(optionalUser.isPresent()).isEqualTo(true);
 
-        User user = optionalUser.get();
+
         CouponFixed cf = couponRepo.getFixedcouponByName("FIX쿠폰");
-        // 검증
-        Integer remainByUserAndCoupon = couponRepo.getRemainByUserAndCoupon(user, cf);
-        assertThat(remainByUserAndCoupon).isEqualTo(9);
+        optionalUser.ifPresentOrElse((user) -> {
+                    assertThat(couponRepo.getRemainByUserAndCoupon(user, cf)).isEqualTo(9);
+                },
+                () -> Assertions.fail("findByName return empty."));
     }
 
     @Test
     @DisplayName("발급 정보 조회")
     @Transactional
-    public void 정보조회(){
+    public void 정보조회() {
         User user = userRepo.findByName("name").get();
         CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
         Optional<CouponState> couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
@@ -141,7 +143,7 @@ class CouponRepositorySDJTest {
         CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
 
         Optional<CouponState> couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
-        if(couponstateByUserAndCoupon.isPresent()){
+        if (couponstateByUserAndCoupon.isPresent()) {
             CouponState couponState = couponstateByUserAndCoupon.get();
             couponState.issueCoupon();
             assertThat(couponState.getUser()).isEqualTo(user);
@@ -150,7 +152,7 @@ class CouponRepositorySDJTest {
         em.clear();
 
         couponstateByUserAndCoupon = couponRepo.getCouponstateByUserAndCoupon(user, c);
-        if(!couponstateByUserAndCoupon.isEmpty()){
+        if (!couponstateByUserAndCoupon.isEmpty()) {
             CouponState couponState = couponstateByUserAndCoupon.get();
             assertThat(couponState.getCurrentAmount()).isEqualTo(2);
         }
@@ -159,27 +161,14 @@ class CouponRepositorySDJTest {
     @Test
     @DisplayName("쿠폰 다 사용시 사용 불가능")
     @Transactional
-    public void 쿠폰사용(){
+    public void 쿠폰사용() {
         User user = userRepo.findByName("name").get();
         CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
 
         CouponState couponstate = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
         couponstate.useCoupon();
         //하나만 발급됐으니 예외 터짐.
-        assertThrows(NotEnoughCouponException.class, ()->couponstate.useCoupon());
-    }
-
-    @Test
-    @DisplayName("쿠폰 다 사용 후 다시 조회")
-    public void 쿠폰사용후조회(){
-        User user = userRepo.findById(1L).get();
-        CouponFixed c = couponRepo.getFixedcouponByName("추석 쿠폰");
-
-        CouponState couponstate = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
-        couponstate.useCoupon();
-
-        CouponState afterUse = couponRepo.getCouponstateByUserAndCoupon(user, c).get();
-        assertThat(afterUse.getCurrentAmount()).isEqualTo(0);
+        assertThrows(NotEnoughCouponException.class, () -> couponstate.useCoupon());
     }
 
     @Test
@@ -192,7 +181,7 @@ class CouponRepositorySDJTest {
             System.out.println("[coupon : " + coupon.getName() + "]");
         }
 
-        //현재 발급은 두개   2021/9/1 - 22:22
+        //현재 발급은 하나만 된 상태.
         assertThat(listByUser.size()).isEqualTo(2);
     }
 }

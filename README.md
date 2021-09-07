@@ -190,7 +190,7 @@ java -jar ./${SNAPSHOT}.jar
 
 ### 7. Design - Repository
 
-Repositories are based on Spring JPA
+Repositories are based on Spring Data JPA
 
 + UserRepository
 + ItemRepository
@@ -235,20 +235,27 @@ Table `User`
 
 ------------------------------------
 
-Table `Coupon`
+Table `Category`
 
 + (pk)
-+ category
-  > We can split the columns into tables later if needed.
-+ discount_value
-  > This number refers to a quantitative discount value.
 + name
-+ max_issue
-  > This indicates maximum issue-able number per user
 
 ------------------------------------
 
-Table `ConponState`
+Table `Coupon`
+
+According to the discount policy, the coupon table is divided into two concrete classes. 
+
++ (pk)
++ category(fk)
++ name
++ count
+  > This indicates maximum issue-able number per user
++ discountAmount / discountRate
+  > This number refers to a quantitative or rate discount value.
+------------------------------------
+
+Table `CouponState`
 
 + (pk)
 + Coupon(fk)
@@ -263,8 +270,8 @@ Table `ConponState`
 Table `Item`
 
 + (pk)
-+ category
-+ amount
++ category(fk)
++ quantity
   > Amount currently available for purchase
 + price
   > Full price
@@ -278,3 +285,45 @@ Table `Order`
 + Item(fk)
 + Coupon(fk)
   > Foreign key's first Index is mean that Not using any coupon.
+
+### 10. Entity - Methods
+
+
+Table `User`
+
++ public static User createUser(String id, String name, String password, String email)
+
+
+
++ public void setAccount(Long account)
+
+
+------------------------------------
+
+Table `Coupon`
+
++ public abstract void changeDiscount(int amount);
+
++ public abstract int getDiscountValue(int itemPrice);
+
+------------------------------------
+
+Table `CouponState`
+
++ public static CouponState issueNewCoupon(User user, Coupon coupon)
+
++ public void issueCoupon()
+
++ public void refundCoupon()
+
++ public void useCoupon()
+
+------------------------------------
+
+Table `Item`
+
++ public static Item createItem(Category category, int quantity, int price)
+
++ public void sell()
+
+------------------------------------

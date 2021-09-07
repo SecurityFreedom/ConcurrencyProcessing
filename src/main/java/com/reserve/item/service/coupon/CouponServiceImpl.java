@@ -25,11 +25,11 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public boolean getCoupon(User user, Coupon coupon) {
+    public boolean getCoupon(User user, Coupon coupon) { // 쿠폰 발급
         Optional<CouponState> couponStateOptional = couponRepository.getCouponstateByUserAndCoupon(user,coupon);
         return couponStateOptional.map((couponState) -> {
             // 사용자가 발급 받은 쿠폰의 개수 상태 < 쿠폰의 발급 제한 개수
-            if(couponState.getIssuedAmount() < coupon.getCount()){
+            if(couponRepository.getRemainByUserAndCoupon(user,coupon) > 0){
                 couponState.issueCoupon();
                 return true;
             }else{

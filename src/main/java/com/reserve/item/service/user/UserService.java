@@ -7,4 +7,5 @@ public interface UserService {
     Long join(User user);
     Long login(String id, String password);
     boolean editUser(User preUser,Class<?> newName);
+    boolean isDuplicate(User user);
 }

@@ -15,7 +15,9 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public Long join(User user) {
-        // 중복 검사 등 verify 필요. -> 적절하지 않으면 -1 반환.
+        if(isDuplicate(user))
+            return 0L;
+
         userRepository.save(user);
         return user.getPk();
     }
@@ -28,6 +30,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean editUser(User preUser,Class<?> newName){
         ////////////////////////////
+        return false;
+    }
+
+    @Override
+    public boolean isDuplicate(User user) {
+        for (User find_User : userRepository.findAll())
+            if(find_User.getId().equals(user.getId()))
+                return true;
+
         return false;
     }
 }

@@ -17,5 +17,5 @@ VALUES
 
 INSERT INTO coupon(type, coupon_id, count, name, discount_amount,discount_rate,category_id)
 VALUES
-    ('F', 1, 50,'추석 맞이 음식 쿠폰', 1500, null, 1),
-    ('R', 2, 15,'추석 맞이 전자제품 쿠폰', null, 10, 2);
+    ('F', 1, 5,'추석 맞이 음식 쿠폰', 1500, null, 1),
+    ('R', 2, 1,'추석 맞이 전자제품 쿠폰', null, 10, 2);

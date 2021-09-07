@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -21,8 +23,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Long login(String id, String password) {
-        return 1L;
+    public boolean login(String id, String password) {
+        Optional<User> byUserid = userRepository.findByUserid(id);
+        if(byUserid.isPresent()){
+            User user = byUserid.get();
+            if (user.getPassword() == password)
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

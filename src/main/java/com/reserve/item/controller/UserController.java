@@ -15,8 +15,17 @@ public class UserController {
     @PostMapping(value = {"/register"})
     @ResponseBody
     public String processTest(@RequestBody UserRegisterForm userRegisterForm){
-        System.out.println("userRegisterForm = " + userRegisterForm);
-        return "ACCEPT!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
+        return "ok";
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public String login(@RequestBody UserLoginForm userLoginForm) {
+        if(userService.login(userLoginForm.getId(), userLoginForm.getPassword())){
+            return "ok";
+        }
+        else {  return "wrong password or id";   }
     }
 
 }

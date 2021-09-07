@@ -30,4 +30,5 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
     //대상 유저의 특정 쿠폰 발급정보
     @Query("select s from CouponState s where s.user = :user and s.coupon = :coupon")
     Optional<CouponState> getCouponstateByUserAndCoupon(@Param("user")User user,@Param("coupon")Coupon coupon);
+
 }

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -15,19 +17,39 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public Long join(User user) {
-        // 중복 검사 등 verify 필요. -> 적절하지 않으면 -1 반환.
+        if(isDuplicate(user))
+            return 0L;
+
         userRepository.save(user);
         return user.getPk();
     }
 
     @Override
-    public Long login(String id, String password) {
-        return 1L;
+    public boolean login(String id, String password) {
+        Optional<User> byUserid = userRepository.findByUserid(id);
+        if(byUserid.isPresent()){
+            User user = byUserid.get();
+            if (user.getPassword() == password)
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean editUser(User preUser,Class<?> newName){
         ////////////////////////////
+        return false;
+    }
+
+    @Override
+    public boolean isDuplicate(User user) {
+        for (User find_User : userRepository.findAll())
+            if(find_User.getId().equals(user.getId()))
+                return true;
+
         return false;
     }
 }

@@ -9,9 +9,11 @@ import lombok.Getter;
  */
 @Getter
 public class CouponDTO {
+    private Long id;
     private String name;
     private int count;
-    public CouponDTO(String name, int count) {
+    public CouponDTO(Long id,String name, int count) {
+        this.id = id;
         this.name = name;
         this.count = count;
     }

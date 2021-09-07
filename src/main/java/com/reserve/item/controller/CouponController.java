@@ -37,7 +37,7 @@ public class CouponController {
     @ResponseBody
     public List<CouponDTO> allCoupon() {
         List<Coupon> couponInfo = couponService.getCouponInfo();
-        List<CouponDTO> res = couponInfo.stream().map(coupon -> new CouponDTO(coupon.getName(), coupon.getCount())).collect(Collectors.toList());
+        List<CouponDTO> res = couponInfo.stream().map(coupon -> new CouponDTO(coupon.getPk(), coupon.getName(), coupon.getCount())).collect(Collectors.toList());
         return res;
     }
 

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import axios from "axios";
 import Header from './components/header/Header.jsx';
 import SubHeader from './components/subheader/SubHeader.jsx';
-import MainPage from "./components/mainpage/MainPage";
+import MainPage from "./components/mainpage/MainPage.jsx";
 import ItemPage from "./components/itempage/ItemPage";
 import MyPage from "./components/mypage/MyPage";
 import LoginPage from "./components/login/LoginPage.jsx";

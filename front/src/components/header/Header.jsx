@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import "./header.scss";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTruckLoading, faJedi, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 

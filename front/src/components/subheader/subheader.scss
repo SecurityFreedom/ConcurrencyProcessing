@@ -1,16 +1,18 @@
 
 
 .header1 {
+    overflow:hidden;
+    background:#333;
     color: black;
     font-size: 13px;
-    width: 100%;
-    height: 100px;
+    width: 107%;
+    height: 70px;
     color:#999;
 
 }
 .tag{
     text-decoration: none;
-    color: inherit;
+    color: white;
 }
 .tag2{
     text-decoration: none;
@@ -29,6 +31,7 @@
     text-align:center;
     line-height: 1;
     padding: 0 0.8em;
+    padding-bottom: 220px;
 }
 
 .menu-item{

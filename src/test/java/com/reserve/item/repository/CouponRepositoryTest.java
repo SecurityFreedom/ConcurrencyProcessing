@@ -2,6 +2,7 @@ package com.reserve.item.repository;
 
 import com.reserve.item.domain.*;
 import com.reserve.item.domain.exceptions.NotEnoughCouponException;
+import com.reserve.item.dto.CouponInfoDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -139,9 +140,8 @@ class CouponRepositoryTest {
     @Transactional
     public void 조회2() {
         User user = userRepo.findByName("name").get();
-        CouponFixed c = couponRepo.getFixedcouponByName("FIX쿠폰");
-        csRepo.
-
+        List<CouponInfoDTO> listByUser = csRepo.getListByUser(user);
+        assertThat(listByUser.size()).isEqualTo(2);
     }
 
     @Test

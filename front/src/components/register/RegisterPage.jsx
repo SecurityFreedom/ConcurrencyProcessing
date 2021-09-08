@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import "./registerpage.scss";
 import MainPage from "../mainpage/MainPage.jsx";
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
 const RegisterPage = () => {
@@ -10,6 +11,7 @@ const RegisterPage = () => {
     const [passwordCheck, setPasswordCheck] = useState("");
     const [email, setEmail] = useState("");
     const [passwordError, setPasswordError] = useState(false);
+    const [RegisterSuccess, setRegisterSuccess] = useState(false);
     const onSubmit = e => {
         console.log(password);
         e.preventDefault();
@@ -27,7 +29,7 @@ const RegisterPage = () => {
                console.log(response);
                if(response.data=="OK"){
                    alert("회원가입이 성공하였습니다.");
-                   return MainPage;
+                   setRegisterSuccess(true);
                }
                else{
                    alert("실패하였습니다");
@@ -89,6 +91,7 @@ const RegisterPage = () => {
             </div>
             <div className="submit">
                 <button onClick={onSubmit}>Register</button>
+                {RegisterSuccess  && <Redirect to={"/home"}/>}
             </div>
         </div>
     );

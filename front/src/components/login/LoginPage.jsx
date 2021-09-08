@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import "./loginpage.scss";
 import axios from "axios";
-const LoginPage = () => {
+import { Redirect } from "react-router-dom";
+const LoginPage = (userPK) => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    const [LoginSuccess, setLoginSuccess] = useState(false);
     const onSubmit = e => {
         console.log(password);
         e.preventDefault();
@@ -14,12 +16,16 @@ const LoginPage = () => {
             .then(function(response){
                 console.log(response);
                 if(response.data=="ok") {
-                    alert("success");
+                    setLoginSuccess(true);
+                    alert("환영합니다");
+                }
+                else{
+                    alert("아이디 또는 비밀번호를 확인하세요")
                 }
             })
             .catch(function(error){
                 console.log("fail");
-                alert("fail");
+                alert("잠시 후 다시 시도하세요");
             });
 
     };
@@ -57,6 +63,7 @@ const LoginPage = () => {
             </div>
             <div className="submit">
                 <button onClick={onSubmit}>Login</button>
+                {LoginSuccess && <Redirect to={"/home"}/>}
             </div>
         </div>
     );

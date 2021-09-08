@@ -9,15 +9,17 @@ const ItemPage = () => {
             console.log(gettingItem);
         }
         getItems();
+
     });
 
     
 
     return (
-        <div>
-            <h1>Item!</h1>
-        </div>
-    );
+                <div>
+
+                </div>
+                );
+
 };
 
 export default ItemPage;
